@@ -9,7 +9,6 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
-// Connect only once, don't crash on Vercel
 let isConnected = false;
 
 async function connectDB() {
@@ -24,6 +23,9 @@ async function connectDB() {
   }
 }
 
-await connectDB();
+async function handler(req, res) {
+  await connectDB();
+  return app(req, res);
+}
 
-export default app; // ✅ Very important
+export default handler;
