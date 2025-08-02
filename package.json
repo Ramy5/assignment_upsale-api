@@ -2,9 +2,9 @@
   "name": "movies",
   "version": "1.0.0",
   "description": "backend app for movies",
-  "main": "app.js",
+  "main": "api/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node api/server.js",
     "dev": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
