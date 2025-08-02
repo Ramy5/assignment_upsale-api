@@ -4,6 +4,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import xss from "xss-clean";
+import compression from "compression";
 
 import movieRoutes from "./routes/movie-route.js";
 
@@ -28,6 +29,9 @@ app.use(mongoSanitize());
 
 // DATA SANITIZATION AGAINST XSS (sending html with the request)
 app.use(xss());
+
+// COMPRESS DATA
+app.use(compression());
 
 // 2) ROUTES
 app.use("/api/v1/movies", movieRoutes);
