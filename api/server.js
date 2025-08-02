@@ -1,6 +1,6 @@
+import app from "../app.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import app from "../app.js";
 
 dotenv.config();
 
@@ -13,19 +13,16 @@ let isConnected = false;
 
 async function connectDB() {
   if (isConnected) return;
-
   try {
     await mongoose.connect(DB);
     isConnected = true;
-    console.log("DB connected successfully!");
-  } catch (err) {
-    console.error("DB connection error:", err);
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
   }
 }
 
-async function handler(req, res) {
+export default async function handler(req, res) {
   await connectDB();
   return app(req, res);
 }
-
-export default handler;
