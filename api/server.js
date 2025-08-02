@@ -4,17 +4,26 @@ import app from "../app.js";
 
 dotenv.config();
 
-const connectDB = async () => {
-  const DB = process.env.DATABASE.replace(
-    "<PASSWORD>",
-    process.env.DATABASE_PASSWORD
-  );
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
 
-  await mongoose.connect(DB);
-  console.log("DB connected successfully!");
-};
+// Connect only once, don't crash on Vercel
+let isConnected = false;
 
-connectDB();
+async function connectDB() {
+  if (isConnected) return;
 
-// Required export for Vercel
-export default app;
+  try {
+    await mongoose.connect(DB);
+    isConnected = true;
+    console.log("DB connected successfully!");
+  } catch (err) {
+    console.error("DB connection error:", err);
+  }
+}
+
+await connectDB();
+
+export default app; // ✅ Very important

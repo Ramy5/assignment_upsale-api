@@ -5,9 +5,9 @@
   "main": "api/server.js",
   "scripts": {
     "start": "node api/server.js",
-    "dev": "nodemon server.js",
-    "start:prod": "cross-env NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js"
+    "dev": "nodemon api/server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon api/server.js",
+    "debug": "ndb api/server.js"
   },
   "author": "",
   "license": "ISC",
