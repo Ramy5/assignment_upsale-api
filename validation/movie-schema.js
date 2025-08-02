@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const movieSchema = z.object({
   title: z.string().min(1),
-  type: z.enum(["Movie", "TV Show"]),
+  type: z.enum(["movie", "tv_show"]),
   director: z
     .string()
     .min(1, { message: "Director name must be at least 1 character long" }),
