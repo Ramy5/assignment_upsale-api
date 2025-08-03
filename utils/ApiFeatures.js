@@ -5,16 +5,21 @@ class ApiFeatures {
   }
 
   filters() {
-    // 1A) SEARCH
     const queryObj = { ...this.queryStr };
     const excludeQueries = ["page", "limit", "sort", "fields"];
-    excludeQueries.forEach((query) => delete queryObj[query]);
+    excludeQueries.forEach((param) => delete queryObj[param]);
 
-    // 1B) ADVANCED SEARCH
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    const regexQuery = {};
 
-    this.query = this.query.find(JSON.parse(queryStr));
+    Object.entries(queryObj).forEach(([key, value]) => {
+      if (typeof value === "string" && !/^\d+$/.test(value)) {
+        regexQuery[key] = { $regex: value, $options: "i" };
+      } else {
+        regexQuery[key] = value;
+      }
+    });
+
+    this.query = this.query.find(regexQuery);
 
     return this;
   }

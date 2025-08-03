@@ -8,6 +8,7 @@ const createMovie = CatchAsync(async (req, res) => {
 
   res.status(201).json({
     status: "Success",
+    message: "Movie created successfully",
     data: {
       movie: newDoc,
     },
@@ -23,6 +24,7 @@ const deleteMovie = CatchAsync(async (req, res, next) => {
 
   res.status(204).json({
     status: "Success",
+    message: "Movie deleted successfully",
     data: null,
   });
 });
@@ -39,6 +41,7 @@ const updateMovie = CatchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: "Success",
+    message: "Movie updated successfully",
     data: {
       movie: doc,
     },
