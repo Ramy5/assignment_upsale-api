@@ -16,13 +16,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(
-  cors({
-    origin: "https://assignment-upsale-frontend.vercel.app",
-    methods: ["GET", "POST", "PATCH", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.options("*", cors());
 app.use(express.json({ limit: "10kb" }));
 app.use(mongoSanitize());
